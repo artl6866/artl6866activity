@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model belt.Models.Activity
+@using belt.Models
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+<center><h1>Dojo Activity Center</h1></center> <h3>Welcome </h3><a href="/logout">Log off</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Activity</th>
+      <th scope="col">Date and Time</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Event Coordinator</th>
+      <th scope="col">Event Number of Participants</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+   @foreach (var activity in @ViewBag.Allactivities)
+   {
+    <tr>
+      <td><a href ="show/@activity.ActivityId">@activity.ActivityName</a></td>
+      <td>@activity.When.ToString("dddd, dd MMMM yyyy")</td>
+      <td>@activity.Duration.ToString("H:mm")hrs</td>
+      <td>@activity.Users.FirstName</td>
+      <td>@activity.Participants.Count</td>
+      @{
+        if(@ViewBag.UserId == @activity.UserId){
+        <td><a href="Delete/@activity.ActivityId">Delete</a></td>
+        }
+        else 
+        {
+          if(@activity.Participants.Count == 0)
+          {
+            <td><a href ="join/@activity.ActivityId">JOIN</a></td>
+          }
+          else
+          {
+            int Count = 0;
+            @foreach(var participant in @activity.Participants)
+            {
+              @if(@participant.Users == @ViewBag.CurrentUser)
+              {
+                Count = 1;
+
+              }
+            }
+            if (Count == 1)
+            {
+            <td><a href="leave/@activity.ActivityId">Leave</a></td>
+            }
+            else
+            {
+              <td><a href ="join/@activity.ActivityId">Join</a></td>
+            }
+          }
+        }  
+      }
+    </tr>
+  
+        
+   }
+  </tbody>
+</table>
+<a href="/addActivity">Add New Activity</a>

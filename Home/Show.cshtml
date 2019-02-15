@@ -1,0 +1,23 @@
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model belt.Models.Activity;
+<a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a>  
+<h1></h1>
+<br>
+<h3>@Model.ActivityName</h3>
+<h4>@Model.Description</h4>
+<br>
+<br>
+<h3>Participants: </h3>
+<ul>
+    @{
+     @foreach(var participant in @ViewBag.CurrentActivity.Participants)
+     {
+        <li>@participant.Users.FirstName @participant.Users.LastName</li>
+     }
+}
+</ul>

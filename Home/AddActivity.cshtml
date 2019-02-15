@@ -1,0 +1,41 @@
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+@model Activity
+<h1>Dojo Activity Center</h1>
+<h2>Create an Activity</h2>
+<a href="/dashboard">Home</a> <a href ="/logout">Log off</a>
+<br>
+<br>
+<form asp-action="CreateActivity" asp-controller="Home" method="post">
+    <div class="form-group col-md-8">
+        <span asp-validation-for="ActivityName"></span>
+        <label asp-for="ActivityName">Title</label>
+        <input asp-for="ActivityName" >
+    </div>
+    <br>
+    <br>
+    <div class="form-group col-md-8">
+        <span asp-validation-for="When"></span>
+        <label asp-for="When">Date</label>
+        <input asp-for="When" >
+    </div>
+    <br>
+    <br>
+    <div class="form-group col-md-8">
+        <span asp-validation-for="Duration"></span>
+        <label asp-for="Duration">Duration</label>
+        <input asp-for="Duration">
+    </div>
+    <br>
+    <br>
+    <div class="form-group col-md-8">
+        <span asp-validation-for="Description"></span>
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description">
+    </div>
+    <br>
+    <br>
+    <br>
+    <button>Create Activity</button>
+</form>
